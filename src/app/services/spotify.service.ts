@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 @Injectable()
 export class SpotifyService {
+
+  artistas: any[] = [];
 
   constructor( public http: HttpClient) { 
 
@@ -13,9 +15,11 @@ export class SpotifyService {
 
     let url = "https://api.spotify.com/v1/search?query=metalica&type=artist&limit=20"
 
-    this.http.get(url).subscribe( resp => {
-      console.log(resp)  
+    let headers = new HttpHeaders({
+      'authorization' : 'Bearer BQBidcQK7phX7tbibtvuHfMvOmVXFMJVhM5-DKhhNnkl9zhECLYwZKm7CvsLiOpT9Y33VB_Guo8d4c4X4aQ'
     })
+
+    return this.http.get(url, { headers })
 
   }
   
